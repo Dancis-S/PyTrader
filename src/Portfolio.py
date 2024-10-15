@@ -7,6 +7,8 @@ class Portfolio:
         self.portfolio_value = initial_cash
         self.transaction_cost = transaction_cost
         self.slippage = slippage
+        self.last_buy_price = None
+        self.trades = []
 
     def buy(self, price, quantity):
         effective_price = price * (1 + self.slippage)
@@ -16,6 +18,14 @@ class Portfolio:
         if self.cash >= cost_with_fee:
             self.cash -= cost_with_fee
             self.holdings += quantity
+            record = {
+                'action': 'Buy',
+                'price': price,
+                'quantity': quantity,
+                'total_cost': cost_with_fee,
+                'remaining_cash': self.cash,
+            }
+            self.trades.append(record)
 
     def sell(self, price, quantity):
         effective_price = price * (1 - self.slippage)
@@ -25,7 +35,19 @@ class Portfolio:
         if self.holdings >= quantity:
             self.cash += revenue_with_fee
             self.holdings -= quantity
+            record = {
+                'action': 'Sell',
+                'price': price,
+                'quantity': quantity,
+                'revenue': revenue_with_fee,
+                'remaining_cash': self.cash,
+            }
+            self.trades.append(record)
 
     def get_value(self, price):
         total = self.cash + (self.holdings * price)
         return total
+
+    def trade_summary(self):
+        import pandas as pd
+        return pd.DataFrame(self.trades)

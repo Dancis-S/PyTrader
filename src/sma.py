@@ -1,6 +1,5 @@
 import pandas as pd
 from pandas import DataFrame
-
 import Portfolio
 
 
@@ -10,12 +9,12 @@ def calculate_sma(df: DataFrame, window):
 
 # Read in the pre-processed data
 ticker = "AAPL"
-data_path = f"../data/{ticker}_processed_data.csv"
+data_path = f"../data/{ticker}_processed_hourly_data.csv"
 data = pd.read_csv(data_path)
 
 # Parameters
-short_window = 50
-long_window = 250
+short_window = 10
+long_window = 100
 
 # Calculate the short and long-term SMA's
 data['SMA_short'] = calculate_sma(data, short_window)
@@ -28,12 +27,15 @@ data = data[data['SMA_long'].notna()]
 portfolio = Portfolio.Portfolio(initial_cash=100000)
 holding = False
 
+stop_loss_percentage = 0.02
+take_profit_percentage = 0.05
+
 for index, row in data.iterrows():
     if row['SMA_short'] > row['SMA_long'] and not holding:
-        portfolio.buy(row['Close'], 10)
+        portfolio.buy(row['Close'], 250)
         holding = True
     elif row['SMA_short'] < row['SMA_long'] and holding:
-        portfolio.sell(row['Close'], 10)
+        portfolio.sell(row['Close'], 250)
         holding = False
 
 # Get the final value at the last day of the data
