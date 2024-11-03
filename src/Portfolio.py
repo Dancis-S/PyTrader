@@ -4,7 +4,6 @@ class Portfolio:
     def __init__(self, initial_cash, transaction_cost=0.001, slippage=0.001):
         self.cash = initial_cash
         self.holdings = 0
-        self.portfolio_value = initial_cash
         self.transaction_cost = transaction_cost
         self.slippage = slippage
         self.last_buy_price = None
