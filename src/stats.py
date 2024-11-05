@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 
 def calculate_compound_annual_growth_rate(beginning_value, final_value, years):
