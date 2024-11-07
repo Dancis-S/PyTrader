@@ -13,6 +13,7 @@ class Portfolio:
         effective_price = price * (1 + self.slippage)
         total_cost = effective_price * quantity
         cost_with_fee = total_cost * (1 + self.transaction_cost)
+        self.last_buy_price = price
 
         if self.cash >= cost_with_fee:
             self.cash -= cost_with_fee
