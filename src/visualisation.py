@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 
+
 def plot_portfolio_value(data, strategy_name):
     """
     Plots the value of the portfolio over time
 
     """
-    print("Hello")
     plt.figure(figsize=(12,6))
     plt.plot(data.index, data['Portfolio Value'], label="Portfolio Value")
     plt.xlabel("Date")
