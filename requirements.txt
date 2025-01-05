@@ -2,5 +2,6 @@ pandas
 numpy
 matplotlib
 yfinance
-pytorch
+torch
 ta
+scikit-learn
