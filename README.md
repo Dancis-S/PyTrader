@@ -5,10 +5,11 @@ This project explores algorithmic trading using traditional strategies and machi
 ## **Key Features**
 1. **Data Collection and Preprocessing**
     - Collected historical stock data (both hourly and daily) from reliable sources (e.g., Yahoo Finance).
-      - Preprocessed the raw data to handle:
-      - Missing values and inconsistencies.
-      - Feature generation for technical indicators like SMA, RSI, and Bollinger Bands.
-      - Normalization and scaling to prepare data for machine learning models.
+    - Preprocessed the raw data to handle:
+        - Missing values and inconsistencies.
+        - Feature generation for technical indicators like SMA, RSI, and Bollinger Bands.
+        - Normalization and scaling to prepare data for machine learning models.
+    - Enhanced preprocessing to support multi-class buy/sell/hold labels dynamically for machine learning compatibility.
     - Saved the processed data for backtesting and training machine learning models.
 
 2. **Backtesting Framework**:
@@ -23,20 +24,28 @@ This project explores algorithmic trading using traditional strategies and machi
    - **MACD (Moving Average Convergence Divergence)**:
      - Momentum-based strategy leveraging MACD line and Signal line crossovers.
 
-4. **Performance Metrics**:
+4. **Machine Learning Models**:
+   - **Random Forest Classifier**:
+     - Predicts buy/sell/hold signals based on engineered features like technical indicators.
+     - Includes cross-validation to ensure robust evaluation.
+     - Supports per-class accuracy evaluation for buy and sell signals to address class imbalance.
+   - **GRU (Gated Recurrent Unit)**:
+     - Advanced recurrent neural network for sequential data analysis.
+     - Dynamically adjusts to input size and class labels directly from the dataset.
+     - Includes bidirectional GRU layers, dropout, and batch normalization for enhanced performance.
+     - Predicts buy/sell/hold signals using a rich feature set derived from market data.
+
+5. **Performance Metrics**:
    - **Sharpe Ratio**: Measures risk-adjusted returns.
    - **CAGR**: Compound Annual Growth Rate of the portfolio.
    - **Max Drawdown**: Biggest peak-to-trough loss in portfolio value.
    - **Volatility**: Quantifies the variability in portfolio returns.
-
-5. **Machine Learning Classifier**:
-   - **Random Forest Classifier**:
-     - Predicts buy/sell/hold signals based on engineered features like technical indicators.
-   - Includes cross-validation to ensure robust evaluation.
+   - **Per-Class Metrics**: Precision, recall, and F1-score for buy/sell/hold signals.
 
 6. **Visualizations**:
    - Portfolio value over time with buy/sell markers.
    - Table showing key performance metrics.
+   - Trade signals overlaid on stock price graphs.
 
 ---
 
@@ -59,6 +68,4 @@ This project explores algorithmic trading using traditional strategies and machi
   - `matplotlib`, `seaborn`: Visualization.
   - `scikit-learn`: Machine learning models and evaluation.
   - `ta`: Technical indicators for feature engineering.
-
----
-
+  - `torch`: GRU implementation and deep learning.
